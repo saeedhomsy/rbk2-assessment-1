@@ -4,11 +4,9 @@ var Stack = function() {
 };
 
 Stack.prototype.add= function(val){
-	this._storage.unshift(val);
-	console.log(this._storage);
+	this._storage.push(val);
 };
 
 Stack.prototype.remove= function(){
-	this._storage.shift(this._storage[0]);
-	console.log(this._storage);
+	this._storage.pop(this._storage[0]);
 };
