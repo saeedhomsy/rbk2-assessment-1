@@ -19,13 +19,12 @@ var makeHashTable = function() {
       var isReturnToStart = false;
       var startPoint = this.retrieve(key);
       if (!startPoint) {
-        while(this._storage[i+1]){
+        while(!start){
           if(){
-            
+
           }
         }
       }
-
     };
   };
 
