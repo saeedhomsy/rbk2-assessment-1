@@ -6,41 +6,32 @@ var makeHashTable = function() {
     _storage: [],
     retrieve: function(key) {
       //your code is here
-      if (key in this._storage[0]) {
-        return i;
+      var hashkey = hashFn(key,max);
+      for (var i = 0; i < this._storage.length; i++) {
+        if (this._storage[i][0]===hashkey) {
+          return this._storage[i][1];
+        }
       }
-
-      return false;
+      return false
     },
-
     insert: function(key, value) {
-      //your code is here
-      var startPoint = this.retrieve(key);
-      var findPlace = false;
-      if (!startPoint) {
-        for (var i = startPoint+1; i < this._storage.length; i++) {
-          if (this._storage[i] === undefined && this._storage[i] <=max) {
-            findPlace = true;
-            this._storage[0][key] = value;
-          }
-        }
-        if (!findPlace) {
-          for (var i = 0; i < startPoint; i++) {
-            if (this._storage[i] === undefined && this._storage[i] <=max) {
-              findPlace = true;
-              this._storage[0][key] = value;
+            //your code is here
+            var hashkey = hashFn(key,max)
+            var findKey = false;
+            for (var i = 0; i < this._storage.length; i++) {
+              if (this._storage[i][0] === hashkey) {
+                findKey = true;
+                this._storage[i] = [hashkey,value]
+              }
             }
+
+            if (!findKey) {
+              this._storage.push([hashkey,value])
+            }
+            return this._storage;
           }
-        }
-        if (!findPlace) {
-          return 'full stack'
-        }
-      }else{
-        this._storage[0][key] = value;
-      }
-    };
-  };
-};
+        };
+      };
 
 // This is a "hashing function". You don't need to worry about it, just use it to turn any key into a pseudo-random key
 var hashFn = function(str, max) {
