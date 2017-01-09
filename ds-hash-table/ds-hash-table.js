@@ -19,14 +19,15 @@ var makeHashTable = function() {
             var hashkey = hashFn(key,max)
             var findKey = false;
             for (var i = 0; i < this._storage.length; i++) {
-              if (this._storage[i][0] === hashkey) {
+
+              if (this._storage[i] !== undefined && this._storage[i][0] === hashkey) {
                 findKey = true;
                 this._storage[i] = [hashkey,value]
               }
             }
 
             if (!findKey) {
-              this._storage.push([hashkey,value])
+              this._storage[hashkey] = [hashkey,value]
             }
             return this._storage;
           }
