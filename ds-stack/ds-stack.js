@@ -8,5 +8,5 @@ Stack.prototype.add= function(val){
 };
 
 Stack.prototype.remove= function(){
-	this._storage.pop(this._storage[0]);
+	this._storage.pop();
 };

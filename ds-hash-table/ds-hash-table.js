@@ -7,29 +7,43 @@ var makeHashTable = function() {
     retrieve: function(key) {
       //your code is here
       var hashkey = hashFn(key,max);
-      for (var i = 0; i < this._storage.length; i++) {
-        if (this._storage[i][0]===hashkey) {
-          return this._storage[i][1];
-        }
+      if (this._storage[hashkey] !== undefined) {
+        for (var i = 0; i < this._storage[hashkey].length; i++) {
+          if (this._storage[hashkey][i][0]===key) {
+            return this._storage[hashkey][i];
+          }
+        } 
       }
       return false
     },
-    insert: function(key, value) {
+    insert: function(key, value) {debugger
             //your code is here
             var hashkey = hashFn(key,max)
-            var findKey = false;
-            for (var i = 0; i < this._storage.length; i++) {
-
-              if (this._storage[i] !== undefined && this._storage[i][0] === hashkey) {
-                findKey = true;
-                this._storage[i] = [hashkey,value]
+            if (this._storage.length === 0) {
+              var arr = [key,value]
+              var parentArr = []
+              parentArr.push(arr)
+              this._storage[hashkey] = parentArr;
+            }else{
+              var isThereDup = false;
+              if (this._storage[hashkey] === undefined) {
+                var arr = [key,value]
+                var parentArr = []
+                parentArr.push(arr)
+                this._storage[hashkey] = parentArr;
+              }else{
+                for (var i = 0; i < this._storage[hashkey].length; i++) {
+                  if (this._storage[hashkey][i][0]===key) {
+                    isThereDup = true;
+                    this._storage[hashkey][i] = [key,value]
+                  }
+                }
+                if (!isThereDup) {
+                  this._storage[hashkey].push([key,value])
+                }
               }
             }
-
-            if (!findKey) {
-              this._storage[hashkey] = [hashkey,value]
-            }
-            return this._storage;
+            return this._storage
           }
         };
       };
